@@ -1,0 +1,28 @@
+on:
+    workflow_call:
+      inputs:
+        run-command:
+          required: true
+          type: string
+        name:
+          required: true
+          type: string
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go-version: [ '1.20' ]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup Go ${{ matrix.go-version }}
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ matrix.go-version }}
+    - name: Test ${{inputs.name}}
+      uses: brian-pickens/go-test-report@v1
+      with:
+        packages: ${{inputs.run-command}}
+        reports-only: "true"
+        summary: "true"

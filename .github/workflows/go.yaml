@@ -1,0 +1,11 @@
+name: Go Spec Checks
+
+on:
+    schedule:
+      - cron: "0 0 * * *"
+jobs:
+  test:
+    uses: ./.github/workflows/template.yaml
+    with:
+      name: Go
+      run-command: '-- -json -count=1 -v ./... -args -run-cmd="go run {path}"'
