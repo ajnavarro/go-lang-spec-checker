@@ -17,5 +17,5 @@ jobs:
       need-extra-binaries: true
       extra-binaries-install: |
                       git clone https://github.com/gnolang/gno.git
-                      cd gnovm
+                      cd gno/gnovm
                       make install
