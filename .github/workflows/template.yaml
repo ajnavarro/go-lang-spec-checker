@@ -40,7 +40,8 @@ jobs:
       uses: dorny/test-reporter@v1
       if: always()
       with:
-        name: Go Spec Coverage
+        name: ${{inputs.name}} Spec Coverage
         path: junit-*.xml
         reporter: java-junit
         fail-on-error: 'false'
+        max-annotations: '100'
