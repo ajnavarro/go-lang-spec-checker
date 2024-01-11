@@ -44,4 +44,4 @@ jobs:
         path: junit-*.xml
         reporter: java-junit
         fail-on-error: 'false'
-        max-annotations: '100'
+        max-annotations: '50'
