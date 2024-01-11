@@ -20,9 +20,15 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: ${{ matrix.go-version }}
-    - name: Test ${{inputs.name}}
-      uses: brian-pickens/go-test-report@v1
+    - name: Install gotestsum (${{inputs.name}})
+      run: 
+    - name: Execute gotestsum (${{inputs.name}})
+      run: gotestsum --format testname --junitfile junit-tests-output.xml -- ${{inputs.run-command}}"
+    - name: Test Report (${{inputs.name}})
+      uses: dorny/test-reporter@v1
+      if: always()
       with:
-        packages: ${{inputs.run-command}}
-        reports_only: "true"
-        summary: "true"
+        name: Go Spec Coverage
+        path: junit-*.xml
+        reporter: java-junit
+        fail-on-error: 'false'
