@@ -1,4 +1,4 @@
-name: Go Spec Checks
+name: GnoVM Spec Checks
 
 on:
     workflow_dispatch:
@@ -12,7 +12,7 @@ jobs:
   test:
     uses: ./.github/workflows/template.yaml
     with:
-      name: Gno VM
+      name: GnoVM
       run-command: '-count=1 -v ./... -args -run-cmd="gno run {path} -root-dir ./gno"'
       need-extra-binaries: true
       extra-binaries-install: |
