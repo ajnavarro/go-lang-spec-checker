@@ -7,6 +7,12 @@ on:
         name:
           required: true
           type: string
+        extra-binaries-install:
+          required: false
+          type: string
+        need-extra-binaries:
+          required: true
+          type: boolean
 permissions:
   contents: read
   actions: read
@@ -23,6 +29,9 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: ${{ matrix.go-version }}
+    - name: Install Prerequisites (${{inputs.name}})
+      if: ${{inputs.need-extra-binaries}}
+      run: ${{inputs.extra-binaries-install}}
     - name: Install gotestsum (${{inputs.name}})
       run: go install gotest.tools/gotestsum@latest
     - name: Execute gotestsum (${{inputs.name}})

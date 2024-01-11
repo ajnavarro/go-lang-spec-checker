@@ -14,3 +14,4 @@ jobs:
     with:
       name: Go
       run-command: '-count=1 -v ./... -args -run-cmd="go run {path}"'
+      need-extra-binaries: false
