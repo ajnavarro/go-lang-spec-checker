@@ -4,6 +4,10 @@ on:
     workflow_dispatch:
     schedule:
       - cron: "0 0 * * *"
+permissions:
+  contents: read
+  actions: read
+  checks: write
 jobs:
   test:
     uses: ./.github/workflows/template.yaml
