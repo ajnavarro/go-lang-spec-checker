@@ -23,7 +23,7 @@ jobs:
     - name: Install gotestsum (${{inputs.name}})
       run: go install gotest.tools/gotestsum@latest
     - name: Execute gotestsum (${{inputs.name}})
-      run: gotestsum --format testname --junitfile junit-tests-output.xml -- ${{inputs.run-command}}"
+      run: gotestsum --format testname --junitfile junit-tests-output.xml -- ${{inputs.run-command}}
     - name: Test Report (${{inputs.name}})
       uses: dorny/test-reporter@v1
       if: always()

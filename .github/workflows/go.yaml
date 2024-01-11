@@ -9,4 +9,4 @@ jobs:
     uses: ./.github/workflows/template.yaml
     with:
       name: Go
-      run-command: './...'
+      run-command: '-count=1 -v ./... -args -run-cmd="go run {path}"'
