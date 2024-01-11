@@ -39,7 +39,8 @@ jobs:
 
     - name: Execute gotestsum (${{inputs.name}})
       run: gotestsum --format testname --junitfile junit-tests-output.xml --jsonfile test-output.json -- ${{inputs.run-command}}
-    - name: Pretty Test Output
+    - name: Pretty Test output (${{inputs.name}})
+      if: always()
       run: cat test-output.json | gotestfmt
     - name: Test Report (${{inputs.name}})
       uses: dorny/test-reporter@v1
