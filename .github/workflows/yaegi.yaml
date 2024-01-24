@@ -13,6 +13,6 @@ jobs:
     uses: ./.github/workflows/template.yaml
     with:
       name: Yaegi
-      run-command: '-count=1 -v ./... -args -run-cmd="yaegi run {path}"'
+      run-command: '-count=1 -v ./... -args -run-cmd="yaegi run -unsafe {path}"'
       need-extra-binaries: true
       extra-binaries-install: go install github.com/traefik/yaegi/cmd/yaegi@latest
