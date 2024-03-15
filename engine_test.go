@@ -12,7 +12,7 @@ import (
 )
 
 var runCmd = flag.String("run-cmd", "go run {path}", "command to run and check all results with spec files")
-var unsupported = flag.String("unsupported", "", "list of unsipported functionalities. Tests based on these features will be skipped.")
+var unsupported = flag.String("unsupported", "", "list of unsupported functionalities. Tests based on these features will be skipped.")
 
 func TestEngine(t *testing.T) {
 	t.Log("using run command:", *runCmd)

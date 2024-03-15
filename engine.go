@@ -1,3 +1,8 @@
+// Package golangspectester provides a test engine to check
+// the compliance of several Go compilers and interpreters
+// against the Go Specification: https://go.dev/ref/spec.
+// The tests are self-contained and implemented in individual
+// files.
 package golangspectester
 
 import (
@@ -11,13 +16,16 @@ import (
 	"strings"
 )
 
+// TestFunc is a type describing the user provided test function.
 type TestFunc func(path, expected string, isError bool, code io.Reader) bool
 
+// Engine describes a test engine.
 type Engine struct {
-	tfp string
-	tf  TestFunc
+	tfp string   // test folder path
+	tf  TestFunc // test function
 }
 
+// NewEngine returns a new test engine.
 func NewEngine(testFolderPath string, testFunc TestFunc) *Engine {
 	return &Engine{
 		tfp: testFolderPath,
@@ -25,6 +33,8 @@ func NewEngine(testFolderPath string, testFunc TestFunc) *Engine {
 	}
 }
 
+// Start executes the tests located in the engine test folder path,
+// using the provided engine test function. It returns the error encountered.
 func (e *Engine) Start() error {
 	return filepath.WalkDir(e.tfp, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
@@ -57,7 +67,7 @@ func expectedFromComment(p string) (out string, isErr bool) {
 	}
 	text := f.Comments[len(f.Comments)-1].Text()
 
-	// sometimes the comment ends with a space.
+	// Sometimes the comment ends with a space.
 	// We need to use \s to avoid the IDE trimming the comment.
 	text = strings.Replace(text, "\\s", " ", -1)
 	if strings.HasPrefix(text, "Output:\n") {
